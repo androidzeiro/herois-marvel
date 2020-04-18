@@ -26,6 +26,7 @@ android {
         versionName rootProject.ext.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -45,6 +46,10 @@ dependencies {
     implementation "androidx.core:core-ktx:$rootProject.androidx_core"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.androidx_constraint"
     implementation "androidx.legacy:legacy-support-v4:$rootProject.androidx_legacy"
+    implementation "androidx.multidex:multidex:$rootProject.android_multidex"
+
+    // Multidex
+    implementation "com.android.support:multidex:$rootProject.multidex"
 
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutines"
@@ -75,6 +80,9 @@ dependencies {
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit"
+    androidTestImplementation "com.squareup.retrofit2:retrofit-mock:$rootProject.retrofit"
+
 
     //Coil
     implementation "io.coil-kt:coil:$rootProject.coil"
