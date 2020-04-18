@@ -98,7 +98,11 @@ dependencies {
     androidTestImplementation "com.squareup.retrofit2:retrofit-mock:$rootProject.retrofit"
 
 
-    //Coil
+    // Coil
     implementation "io.coil-kt:coil:$rootProject.coil"
+
+    // Discrete Scrollview
+    implementation "com.yarolegovich:discrete-scrollview:$rootProject.discrete_scrollview"
+
 
 }

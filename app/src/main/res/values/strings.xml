@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Heróis Marvel</string>
+
+    <string name="nome_heroi">Homem Aranha</string>
 </resources>

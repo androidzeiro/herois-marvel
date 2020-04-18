@@ -43,6 +43,7 @@ ext {
     constraint_layout = '1.1.3'
     dagger = '2.25.2'
     coil = '0.9.5'
+    discrete_scrollview = "1.4.9"
 
     // androidx
     androidx_lifecycle = '2.2.0-rc03'
