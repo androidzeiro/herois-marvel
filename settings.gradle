@@ -1,0 +1,2 @@
+rootProject.name='Heróis Marvel'
+include ':app'
