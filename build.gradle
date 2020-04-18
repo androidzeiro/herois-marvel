@@ -1,7 +1,6 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
     ext.kotlin_version = '1.3.72'
+    ext.android_nav = '2.2.0-rc03'
     repositories {
         google()
         jcenter()
@@ -10,9 +9,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.6.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$android_nav"
     }
 }
 
@@ -20,10 +17,41 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+        maven { url "https://jitpack.io" }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    // Sdk e tools
+    compileSdkVersion = 29
+    minSdkVersion = 19
+    targetSdkVersion = 29
+    versionCode = 1
+    versionName = "1.0.0"
+    buildToolsVersion = '29.0.3'
+
+    // App dependências
+    ok_http = '3.12.6'
+    retrofit = '2.6.4'
+    gson = '2.8.6'
+    coroutines = '1.3.3'
+    constraint_layout = '1.1.3'
+    dagger = '2.25.2'
+    coil = '0.9.5'
+
+    // androidx
+    androidx_lifecycle = '2.2.0'
+    androidx_lifecycle_runtime = '2.2.0'
+    androidx_nav = '2.2.2'
+    androidx_constraint = '1.1.3'
+    androidx_legacy = '1.0.0'
+    androidx_appcompat = '1.1.0'
+    androidx_core = '1.2.0'
+    androidx_constraint = '1.1.3'
+    android_material = '1.1.0'
+
 }
