@@ -5,6 +5,8 @@ import br.com.raphael.heroismarvel.MainActivity
 import br.com.raphael.heroismarvel.di.module.AppModule
 import br.com.raphael.heroismarvel.di.module.BackendModule
 import br.com.raphael.heroismarvel.di.module.RemoteModule
+import br.com.raphael.heroismarvel.viewmodel.DetalhesHeroiViewModel
+import br.com.raphael.heroismarvel.viewmodel.ListagemHeroisViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -22,6 +24,7 @@ interface AppComponent {
 
     fun inject(activity: MainActivity)
 
-   // fun inject(viewModel: CarrinhoViewModel)
+    fun inject(viewModel: ListagemHeroisViewModel)
+    fun inject(viewModel: DetalhesHeroiViewModel)
 
 }
