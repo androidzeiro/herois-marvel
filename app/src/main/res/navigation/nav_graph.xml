@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/listagemHeroisFragment">
+
+    <fragment
+        android:id="@+id/listagemHeroisFragment"
+        android:name="br.com.raphael.heroismarvel.ui.ListagemHeroisFragment"
+        android:label="ListagemHeroisFragment"
+        tools:layout="@layout/fragment_listagem_herois">
+        <action
+            android:id="@+id/listagemHerois_to_detalhesHerois"
+            app:destination="@id/detalhesHeroiFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalhesHeroiFragment"
+        android:name="br.com.raphael.heroismarvel.ui.DetalhesHeroiFragment"
+        android:label="fragment_detalhes_heroi"
+        tools:layout="@layout/fragment_detalhes_heroi" >
+        <argument
+            android:name="id"
+            app:argType="long" />
+    </fragment>
+</navigation>
