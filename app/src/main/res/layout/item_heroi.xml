@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:padding="8dp"
+            android:background="@color/blackTransparent"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             android:textColor="@color/white"
             android:textSize="26sp"

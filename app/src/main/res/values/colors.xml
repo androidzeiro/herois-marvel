@@ -6,5 +6,6 @@
     <color name="white">#ffffffff</color>
     <color name="backgroundItem">#424242</color>
     <color name="backgroundListagem">#2B292B</color>
+    <color name="blackTransparent">#99000000</color>
 
 </resources>
