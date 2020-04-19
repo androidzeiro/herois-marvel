@@ -3,4 +3,6 @@
 
     <string name="nome_heroi">Homem Aranha</string>
     <string name="description_available">No description available</string>
+    <string name="msg_erro_http">Ocorreu um erro inesperado, tente novamente em alguns instantes.</string>
+    <string name="msg_erro_api">%s Código: %s</string>
 </resources>
