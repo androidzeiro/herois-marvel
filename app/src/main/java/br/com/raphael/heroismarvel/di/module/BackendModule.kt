@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 open class BackendModule {
 
-    open val baseUrl by lazy { "http://apivendas.ddns.net:3000" }
+    open val baseUrl by lazy { "http://gateway.marvel.com" }
 
     @Provides
     @Singleton

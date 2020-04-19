@@ -54,13 +54,13 @@ open class RemoteModule(private val app: App) {
             var requestBuilder = chain.request().newBuilder()
 
 //            requestBuilder = if (app.isConnected()) {
-//                requestBuilder.header("Cache-Control", "private, max-age=1")
+                requestBuilder.header("Cache-Control", "private, max-age=1")
 //            } else {
-                requestBuilder
-                    .header(
-                        "Cache-Control",
-                        "private, only-if-cached, max-stale=$CACHE_TIME"
-                    )
+//                requestBuilder
+//                    .header(
+//                        "Cache-Control",
+//                        "private, only-if-cached, max-stale=$CACHE_TIME"
+//                    )
 //            }
 
             chain.proceed(requestBuilder.build())

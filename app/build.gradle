@@ -22,7 +22,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "br.com.redetodolar.todolar"
+        applicationId "br.com.raphael.heroismarvel"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
@@ -96,7 +96,6 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit"
     androidTestImplementation "com.squareup.retrofit2:retrofit-mock:$rootProject.retrofit"
-
 
     // Coil
     implementation "io.coil-kt:coil:$rootProject.coil"
