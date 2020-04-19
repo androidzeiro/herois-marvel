@@ -51,7 +51,7 @@ class DetalhesHeroiFragment : Fragment() {
                 }
 
                 tv_nome.text = it.name
-                tv_descricao.text = it.description
+                tv_descricao.text = if(it.description.isNotEmpty()) it.description else getString(R.string.description_available)
             }
         })
 
