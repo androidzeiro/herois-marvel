@@ -8,17 +8,18 @@
     <fragment
         android:id="@+id/listagemHeroisFragment"
         android:name="br.com.raphael.heroismarvel.ui.ListagemHeroisFragment"
-        android:label="ListagemHeroisFragment"
+        android:label="Heróis"
         tools:layout="@layout/fragment_listagem_herois">
         <action
             android:id="@+id/listagemHerois_to_detalhesHerois"
-            app:destination="@id/detalhesHeroiFragment" />
+            app:destination="@id/detalhesHeroiFragment"
+            app:popUpTo="@id/listagemHeroisFragment" />
     </fragment>
     <fragment
         android:id="@+id/detalhesHeroiFragment"
         android:name="br.com.raphael.heroismarvel.ui.DetalhesHeroiFragment"
-        android:label="fragment_detalhes_heroi"
-        tools:layout="@layout/fragment_detalhes_heroi" >
+        android:label="Detalhes"
+        tools:layout="@layout/fragment_detalhes_heroi">
         <argument
             android:name="id"
             app:argType="integer" />
