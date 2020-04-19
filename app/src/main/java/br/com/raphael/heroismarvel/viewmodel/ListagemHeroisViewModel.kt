@@ -24,9 +24,13 @@ class ListagemHeroisViewModel(application: Application) : AndroidViewModel(appli
     val erro: LiveData<String>
         get() = _erro
 
-    private val _herois = MutableLiveData<List<Personagem>>()
-    val herois: LiveData<List<Personagem>>
-        get() = _herois
+    private val _todos = MutableLiveData<List<Personagem>>()
+    val todos: LiveData<List<Personagem>>
+        get() = _todos
+
+    private val _avengers = MutableLiveData<List<Personagem>>()
+    val avengers: LiveData<List<Personagem>>
+        get() = _avengers
     
     @Inject
     lateinit var backendRepository: BackendRepository
@@ -42,7 +46,38 @@ class ListagemHeroisViewModel(application: Application) : AndroidViewModel(appli
         viewModelScope.launch {
             try {
                 val response = backendRepository.getHeroisAsync()
-                _herois.postValue(response.data.results)
+                _todos.postValue(response.data.results)
+                println("11111")
+            } catch (e: Exception) {
+                when (e) {
+                    is HttpException -> {
+                        val erroJson = e.getResponse() ?: ""
+                        val error =
+                            Gson().tryParse<ResponseBody>(
+                                erroJson
+                            )
+
+                        _erro.postValue(
+                            resources.getString(R.string.msg_erro_api).format(
+                                when (e.code()) {
+                                    409 -> error?.status ?: resources.getString(R.string.msg_erro_http)
+                                    else -> resources.getString(R.string.msg_erro_http)
+                                },
+                                e.code()
+                            )
+                        )
+                    }
+                    else -> _erro.postValue(e.toString())
+                }
+            }
+        }
+    }
+
+    fun getAvengers() {
+        viewModelScope.launch {
+            try {
+                val response = backendRepository.getAvengers()
+                _avengers.postValue(response)
                 println("11111")
             } catch (e: Exception) {
                 when (e) {

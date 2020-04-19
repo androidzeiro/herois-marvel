@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import br.com.raphael.heroismarvel.R
 import br.com.raphael.heroismarvel.model.Personagem
@@ -45,7 +46,13 @@ class ListagemHeroisFragment : Fragment() {
             )
         }
 
-        viewModel.herois.observe(viewLifecycleOwner, Observer {
+        viewModel.todos.observe(viewLifecycleOwner, Observer {
+            adapter.items.clear()
+            adapter.items.addAll(it)
+            adapter.notifyDataSetChanged()
+        })
+
+        viewModel.avengers.observe(viewLifecycleOwner, Observer {
             adapter.items.clear()
             adapter.items.addAll(it)
             adapter.notifyDataSetChanged()
@@ -57,6 +64,18 @@ class ListagemHeroisFragment : Fragment() {
                 println("errroooo")
             }
         })
+
+        fb_all.setOnClickListener {
+            viewModel.getHerois()
+            fb_all.isEnabled = false
+            fb_avengers.isEnabled = true
+        }
+
+        fb_avengers.setOnClickListener {
+            viewModel.getAvengers()
+            fb_avengers.isEnabled = false
+            fb_all.isEnabled = true
+        }
     }
 
     fun onHeroiClicked(item: Personagem) {

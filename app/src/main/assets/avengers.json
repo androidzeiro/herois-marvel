@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1017310,
+        "name": "Iron Man",
+        "thumbnail": {
+            "path": "https://user-images.githubusercontent.com/24237865/77314104-f0755080-6cfc-11ea-9560-9efdb26033dc",
+            "extension": "jpg"
+        }
+    },
+    {
+        "id": 1017327,
+        "name": "Captain America",
+        "thumbnail": {
+            "path": "https://user-images.githubusercontent.com/24237865/77314112-f23f1400-6cfc-11ea-92d8-9c1da11a5be5",
+            "extension": "jpg"
+        }
+    },
+    {
+        "id": 1016452,
+        "name": "Spiderman",
+        "thumbnail": {
+            "path": "https://user-images.githubusercontent.com/24237865/77314084-eb180600-6cfc-11ea-89d5-65b673f0a391",
+            "extension": "jpg"
+        }
+    },
+    {
+        "id": 1011358,
+        "name": "Doctor Strange",
+        "thumbnail": {
+            "path": "https://user-images.githubusercontent.com/24237865/77314089-ece1c980-6cfc-11ea-9880-b66c05eecbe8",
+            "extension": "jpg"
+        }
+    },
+    {
+        "id": 1017302,
+        "name": "Thor",
+        "thumbnail": {
+            "path": "https://user-images.githubusercontent.com/24237865/77314094-eeab8d00-6cfc-11ea-8c33-e0ec914c0895",
+            "extension": "jpg"
+        }
+    }
+]
