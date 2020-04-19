@@ -10,4 +10,7 @@ class BackendRepository @Inject constructor(
 
     suspend fun getHeroisAsync(): Response =
         backendService.getHerois()
+
+    suspend fun getHeroiAsync(id: Int): Response =
+        backendService.getHeroi(id)
 }

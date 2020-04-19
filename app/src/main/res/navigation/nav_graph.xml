@@ -21,6 +21,6 @@
         tools:layout="@layout/fragment_detalhes_heroi" >
         <argument
             android:name="id"
-            app:argType="long" />
+            app:argType="integer" />
     </fragment>
 </navigation>

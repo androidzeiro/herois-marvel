@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import br.com.raphael.heroismarvel.R
 import br.com.raphael.heroismarvel.model.Personagem
 import br.com.raphael.heroismarvel.ui.adapters.HeroisAdapter
@@ -59,6 +60,7 @@ class ListagemHeroisFragment : Fragment() {
     }
 
     fun onHeroiClicked(item: Personagem) {
-
+        val action = ListagemHeroisFragmentDirections.listagemHeroisToDetalhesHerois(id = item.id)
+        view?.findNavController()?.navigate(action)
     }
 }
