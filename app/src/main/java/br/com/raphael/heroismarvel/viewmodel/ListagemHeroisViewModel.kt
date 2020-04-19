@@ -31,6 +31,10 @@ class ListagemHeroisViewModel(application: Application) : AndroidViewModel(appli
     private val _avengers = MutableLiveData<List<Personagem>>()
     val avengers: LiveData<List<Personagem>>
         get() = _avengers
+
+    private val _all = MutableLiveData<Boolean>()
+    val all: LiveData<Boolean>
+        get() = _all
     
     @Inject
     lateinit var backendRepository: BackendRepository
@@ -43,6 +47,7 @@ class ListagemHeroisViewModel(application: Application) : AndroidViewModel(appli
     }
 
     fun getHerois() {
+        _all.postValue(true)
         viewModelScope.launch {
             try {
                 val response = backendRepository.getHeroisAsync()
@@ -74,6 +79,7 @@ class ListagemHeroisViewModel(application: Application) : AndroidViewModel(appli
     }
 
     fun getAvengers() {
+        _all.postValue(false)
         viewModelScope.launch {
             try {
                 val response = backendRepository.getAvengers()

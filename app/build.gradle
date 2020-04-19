@@ -105,5 +105,6 @@ dependencies {
     // Discrete Scrollview
     implementation "com.yarolegovich:discrete-scrollview:$rootProject.discrete_scrollview"
 
-
+    // Sweet Alert Dialog
+    implementation "com.github.f0ris.sweetalert:library:$rootProject.sweetalert"
 }

@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import br.com.raphael.heroismarvel.R
 import br.com.raphael.heroismarvel.viewmodel.DetalhesHeroiViewModel
+import cn.pedant.SweetAlert.SweetAlertDialog
 import coil.api.load
 import coil.size.Scale
 import kotlinx.android.synthetic.main.fragment_detalhes_heroi.*
@@ -35,8 +36,11 @@ class DetalhesHeroiFragment : Fragment() {
 
         viewModel.erro.observe(viewLifecycleOwner, Observer {
             it?.let {
-                // Modal
-                println("errroooo")
+                SweetAlertDialog(requireContext(), SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText(getString(R.string.attention))
+                    .setContentText(it)
+                    .setConfirmText(getString(R.string.ok))
+                    .show()
             }
         })
 

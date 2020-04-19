@@ -5,4 +5,6 @@
     <string name="description_available">No description available</string>
     <string name="msg_erro_http">Ocorreu um erro inesperado, tente novamente em alguns instantes.</string>
     <string name="msg_erro_api">%s Código: %s</string>
+    <string name="attention">Attention</string>
+    <string name="ok">Ok</string>
 </resources>
