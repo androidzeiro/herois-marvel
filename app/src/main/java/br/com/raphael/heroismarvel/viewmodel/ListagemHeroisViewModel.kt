@@ -35,7 +35,11 @@ class ListagemHeroisViewModel(application: Application) : AndroidViewModel(appli
     private val _all = MutableLiveData<Boolean>()
     val all: LiveData<Boolean>
         get() = _all
-    
+
+    private val _carregando = MutableLiveData<Boolean>()
+    val carregando: LiveData<Boolean>
+        get() = _carregando
+
     @Inject
     lateinit var backendRepository: BackendRepository
     @Inject
@@ -50,9 +54,10 @@ class ListagemHeroisViewModel(application: Application) : AndroidViewModel(appli
         _all.postValue(true)
         viewModelScope.launch {
             try {
+                _carregando.postValue(true)
                 val response = backendRepository.getHeroisAsync()
                 _todos.postValue(response.data.results)
-                println("11111")
+                _carregando.postValue(false)
             } catch (e: Exception) {
                 when (e) {
                     is HttpException -> {
@@ -82,9 +87,10 @@ class ListagemHeroisViewModel(application: Application) : AndroidViewModel(appli
         _all.postValue(false)
         viewModelScope.launch {
             try {
+                _carregando.postValue(true)
                 val response = backendRepository.getAvengers()
                 _avengers.postValue(response)
-                println("11111")
+                _carregando.postValue(false)
             } catch (e: Exception) {
                 when (e) {
                     is HttpException -> {

@@ -33,6 +33,10 @@ class DetalhesHeroiViewModel(application: Application) : AndroidViewModel(applic
     val sucesso: LiveData<Personagem>
         get() = _sucesso
 
+    private val _carregando = MutableLiveData<Boolean>()
+    val carregando: LiveData<Boolean>
+        get() = _carregando
+
     init {
         getApplication<App>().component.inject(this)
     }
@@ -40,8 +44,10 @@ class DetalhesHeroiViewModel(application: Application) : AndroidViewModel(applic
     fun getHeroi(id: Int) {
         viewModelScope.launch {
             try {
+                _carregando.postValue(true)
                 val response = backendRepository.getHeroiAsync(id)
                 _sucesso.postValue(response.data.results[0])
+                _carregando.postValue(false)
             } catch (e: Exception) {
                 when (e) {
                     is HttpException -> {

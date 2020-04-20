@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.getColor
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -74,6 +75,10 @@ class ListagemHeroisFragment : Fragment() {
                     .setConfirmText(getString(R.string.ok))
                     .show()
             }
+        })
+
+        viewModel.carregando.observe(viewLifecycleOwner, Observer {
+            pb_carregando.isVisible = it
         })
 
         viewModel.all.observe(viewLifecycleOwner, Observer {

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
@@ -14,6 +15,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import coil.api.load
 import coil.size.Scale
 import kotlinx.android.synthetic.main.fragment_detalhes_heroi.*
+import kotlinx.android.synthetic.main.fragment_detalhes_heroi.pb_carregando
+import kotlinx.android.synthetic.main.fragment_listagem_herois.*
 import kotlinx.android.synthetic.main.item_heroi.iv_heroi
 import kotlinx.android.synthetic.main.item_heroi.tv_nome
 
@@ -57,6 +60,10 @@ class DetalhesHeroiFragment : Fragment() {
                 tv_nome.text = it.name
                 tv_descricao.text = if(it.description.isNotEmpty()) it.description else getString(R.string.description_available)
             }
+        })
+
+        viewModel.carregando.observe(viewLifecycleOwner, Observer {
+            pb_carregando.isVisible = it
         })
 
     }
