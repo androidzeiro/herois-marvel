@@ -20,25 +20,25 @@ import javax.inject.Inject
 
 class ListagemHeroisViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _erro = MutableLiveData<String>()
-    val erro: LiveData<String>
-        get() = _erro
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String>
+        get() = _error
 
-    private val _todos = MutableLiveData<List<Personagem>>()
-    val todos: LiveData<List<Personagem>>
-        get() = _todos
+    private val _allCharacters = MutableLiveData<List<Personagem>>()
+    val allCharacters: LiveData<List<Personagem>>
+        get() = _allCharacters
 
     private val _avengers = MutableLiveData<List<Personagem>>()
     val avengers: LiveData<List<Personagem>>
         get() = _avengers
 
-    private val _all = MutableLiveData<Boolean>()
-    val all: LiveData<Boolean>
-        get() = _all
+    private val _turn = MutableLiveData<Boolean>()
+    val turn: LiveData<Boolean>
+        get() = _turn
 
-    private val _carregando = MutableLiveData<Boolean>()
-    val carregando: LiveData<Boolean>
-        get() = _carregando
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean>
+        get() = _loading
 
     @Inject
     lateinit var backendRepository: BackendRepository
@@ -51,13 +51,13 @@ class ListagemHeroisViewModel(application: Application) : AndroidViewModel(appli
     }
 
     fun getHerois() {
-        _all.postValue(true)
+        _turn.postValue(true)
         viewModelScope.launch {
             try {
-                _carregando.postValue(true)
+                _loading.postValue(true)
                 val response = backendRepository.getHeroisAsync()
-                _todos.postValue(response.data.results)
-                _carregando.postValue(false)
+                _allCharacters.postValue(response.data.results)
+                _loading.postValue(false)
             } catch (e: Exception) {
                 when (e) {
                     is HttpException -> {
@@ -67,7 +67,7 @@ class ListagemHeroisViewModel(application: Application) : AndroidViewModel(appli
                                 erroJson
                             )
 
-                        _erro.postValue(
+                        _error.postValue(
                             resources.getString(R.string.msg_erro_api).format(
                                 when (e.code()) {
                                     409 -> error?.status ?: resources.getString(R.string.msg_erro_http)
@@ -77,20 +77,20 @@ class ListagemHeroisViewModel(application: Application) : AndroidViewModel(appli
                             )
                         )
                     }
-                    else -> _erro.postValue(e.toString())
+                    else -> _error.postValue(e.toString())
                 }
             }
         }
     }
 
     fun getAvengers() {
-        _all.postValue(false)
+        _turn.postValue(false)
         viewModelScope.launch {
             try {
-                _carregando.postValue(true)
+                _loading.postValue(true)
                 val response = backendRepository.getAvengers()
                 _avengers.postValue(response)
-                _carregando.postValue(false)
+                _loading.postValue(false)
             } catch (e: Exception) {
                 when (e) {
                     is HttpException -> {
@@ -100,7 +100,7 @@ class ListagemHeroisViewModel(application: Application) : AndroidViewModel(appli
                                 erroJson
                             )
 
-                        _erro.postValue(
+                        _error.postValue(
                             resources.getString(R.string.msg_erro_api).format(
                                 when (e.code()) {
                                     409 -> error?.status ?: resources.getString(R.string.msg_erro_http)
@@ -110,7 +110,7 @@ class ListagemHeroisViewModel(application: Application) : AndroidViewModel(appli
                             )
                         )
                     }
-                    else -> _erro.postValue(e.toString())
+                    else -> _error.postValue(e.toString())
                 }
             }
         }

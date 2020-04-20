@@ -26,17 +26,17 @@ class DetalhesHeroiViewModel(application: Application) : AndroidViewModel(applic
     @Inject
     lateinit var resources: Resources
 
-    private val _erro = MutableLiveData<String>()
-    val erro: LiveData<String>
-        get() = _erro
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String>
+        get() = _error
 
-    private val _sucesso = MutableLiveData<LiveDataResult<Personagem>>()
-    val sucesso: MutableLiveData<LiveDataResult<Personagem>>
-        get() = _sucesso
+    private val _success = MutableLiveData<LiveDataResult<Personagem>>()
+    val success: MutableLiveData<LiveDataResult<Personagem>>
+        get() = _success
 
-    private val _carregando = MutableLiveData<Boolean>()
-    val carregando: LiveData<Boolean>
-        get() = _carregando
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean>
+        get() = _loading
 
     init {
         getApplication<App>().component.inject(this)
@@ -45,10 +45,10 @@ class DetalhesHeroiViewModel(application: Application) : AndroidViewModel(applic
     fun getHeroi(id: Int) {
         viewModelScope.launch {
             try {
-                _carregando.postValue(true)
+                _loading.postValue(true)
                 val response = backendRepository.getHeroiAsync(id)
-                _sucesso.value = LiveDataResult.success(response.data.results[0])
-                _carregando.postValue(false)
+                _success.value = LiveDataResult.success(response.data.results[0])
+                _loading.postValue(false)
             } catch (e: Exception) {
                 when (e) {
                     is HttpException -> {
@@ -58,7 +58,7 @@ class DetalhesHeroiViewModel(application: Application) : AndroidViewModel(applic
                                 erroJson
                             )
 
-                        _erro.postValue(
+                        _error.postValue(
                             resources.getString(R.string.msg_erro_api).format(
                                 when (e.code()) {
                                     404 -> error?.status ?: resources.getString(R.string.msg_erro_http)
@@ -69,7 +69,7 @@ class DetalhesHeroiViewModel(application: Application) : AndroidViewModel(applic
                             )
                         )
                     }
-                    else -> _erro.postValue(e.toString())
+                    else -> _error.postValue(e.toString())
                 }
             }
         }

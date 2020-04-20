@@ -31,14 +31,11 @@ open class App : MultiDexApplication(), Application.ActivityLifecycleCallbacks {
             .appModule(AppModule(this))
             .remoteModule(RemoteModule(this))
             .build()
-
     }
 
     override fun onCreate() {
         super.onCreate()
-
         component.inject(this)
-
         registerActivityLifecycleCallbacks(this)
     }
 }

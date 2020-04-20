@@ -41,6 +41,29 @@ class ListagemHeroisFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupList()
+
+        observerallCharacters()
+        observerAvengers()
+        observerError()
+        observerLoading()
+        observerTurn()
+
+        fb_all.setOnClickListener {
+            viewModel.getHerois()
+        }
+
+        fb_avengers.setOnClickListener {
+            viewModel.getAvengers()
+        }
+    }
+
+    private fun onHeroiClicked(item: Personagem) {
+        val action = ListagemHeroisFragmentDirections.listagemHeroisToDetalhesHerois(id = item.id)
+        view?.findNavController()?.navigate(action)
+    }
+
+    private fun setupList(){
         rv_listagem.apply {
             adapter = this@ListagemHeroisFragment.adapter
             setItemTransitionTimeMillis(150)
@@ -50,24 +73,30 @@ class ListagemHeroisFragment : Fragment() {
                     .build()
             )
         }
+    }
 
-        viewModel.todos.observe(viewLifecycleOwner, Observer {
-            if (viewModel.all.value == true) {
+    private fun observerallCharacters() {
+        viewModel.allCharacters.observe(viewLifecycleOwner, Observer {
+            if (viewModel.turn.value == true) {
                 adapter.items.clear()
                 adapter.items.addAll(it)
                 adapter.notifyDataSetChanged()
             }
         })
+    }
 
+    private fun observerAvengers() {
         viewModel.avengers.observe(viewLifecycleOwner, Observer {
-            if (viewModel.all.value == false) {
+            if (viewModel.turn.value == false) {
                 adapter.items.clear()
                 adapter.items.addAll(it)
                 adapter.notifyDataSetChanged()
             }
         })
+    }
 
-        viewModel.erro.observe(viewLifecycleOwner, Observer {
+    private fun observerError() {
+        viewModel.error.observe(viewLifecycleOwner, Observer {
             it?.let {
                 SweetAlertDialog(requireContext(), SweetAlertDialog.WARNING_TYPE)
                     .setTitleText(getString(R.string.attention))
@@ -76,12 +105,16 @@ class ListagemHeroisFragment : Fragment() {
                     .show()
             }
         })
+    }
 
-        viewModel.carregando.observe(viewLifecycleOwner, Observer {
+    private fun observerLoading() {
+        viewModel.loading.observe(viewLifecycleOwner, Observer {
             pb_carregando.isVisible = it
         })
+    }
 
-        viewModel.all.observe(viewLifecycleOwner, Observer {
+    private fun observerTurn(){
+        viewModel.turn.observe(viewLifecycleOwner, Observer {
             it?.let {
                 fb_all.isEnabled = !it
                 fb_avengers.isEnabled = it
@@ -102,18 +135,5 @@ class ListagemHeroisFragment : Fragment() {
                 }
             }
         })
-
-        fb_all.setOnClickListener {
-            viewModel.getHerois()
-        }
-
-        fb_avengers.setOnClickListener {
-            viewModel.getAvengers()
-        }
-    }
-
-    fun onHeroiClicked(item: Personagem) {
-        val action = ListagemHeroisFragmentDirections.listagemHeroisToDetalhesHerois(id = item.id)
-        view?.findNavController()?.navigate(action)
     }
 }

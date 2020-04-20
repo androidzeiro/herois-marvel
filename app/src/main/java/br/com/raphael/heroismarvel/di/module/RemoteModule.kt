@@ -1,7 +1,6 @@
 package br.com.raphael.heroismarvel.di.module
 
 import br.com.raphael.heroismarvel.App
-import br.com.raphael.heroismarvel.remote.util.HttpClientUtils
 import br.com.raphael.heroismarvel.remote.util.PrintingEventListener
 import dagger.Module
 import dagger.Provides
@@ -42,26 +41,11 @@ open class RemoteModule(private val app: App) {
         builder: OkHttpClient.Builder, logging: HttpLoggingInterceptor
     ): OkHttpClient {
 
-        val sslSocketFactory = HttpClientUtils.sSLSocketFactory
-        val b = if (sslSocketFactory == null) {
-            builder
-        } else {
-            builder
-                .sslSocketFactory(sslSocketFactory, HttpClientUtils.trustManager)
-                .hostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
-        }
+        val b = builder
         return b.addInterceptor { chain ->
-            var requestBuilder = chain.request().newBuilder()
+            val requestBuilder = chain.request().newBuilder()
 
-//            requestBuilder = if (app.isConnected()) {
-                requestBuilder.header("Cache-Control", "private, max-age=1")
-//            } else {
-//                requestBuilder
-//                    .header(
-//                        "Cache-Control",
-//                        "private, only-if-cached, max-stale=$CACHE_TIME"
-//                    )
-//            }
+            requestBuilder.header("Cache-Control", "private, max-age=1")
 
             chain.proceed(requestBuilder.build())
         }
