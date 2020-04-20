@@ -49,6 +49,9 @@ class ListagemHeroisFragment : Fragment() {
 
         viewModel.todos.observe(viewLifecycleOwner, Observer {
             if (viewModel.all.value == true) {
+                if(adapter.items.size > 0) {
+                    rv_listagem.smoothScrollToPosition(0)
+                }
                 adapter.items.clear()
                 adapter.items.addAll(it)
                 adapter.notifyDataSetChanged()
@@ -57,6 +60,9 @@ class ListagemHeroisFragment : Fragment() {
 
         viewModel.avengers.observe(viewLifecycleOwner, Observer {
             if (viewModel.all.value == false) {
+                if(adapter.items.size > 0) {
+                    rv_listagem.smoothScrollToPosition(0)
+                }
                 adapter.items.clear()
                 adapter.items.addAll(it)
                 adapter.notifyDataSetChanged()
