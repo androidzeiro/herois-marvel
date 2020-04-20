@@ -47,7 +47,7 @@ class DetalhesHeroiViewModel(application: Application) : AndroidViewModel(applic
             try {
                 _loading.postValue(true)
                 val response = backendRepository.getHeroiAsync(id)
-                _success.value = LiveDataResult.success(response.data.results[0])
+                _success.postValue(LiveDataResult.success(response.data.results[0]))
                 _loading.postValue(false)
             } catch (e: Exception) {
                 when (e) {

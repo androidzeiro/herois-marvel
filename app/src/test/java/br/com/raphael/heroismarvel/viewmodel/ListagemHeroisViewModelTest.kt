@@ -15,38 +15,38 @@ import org.junit.runners.JUnit4
 
 
 @RunWith(JUnit4::class)
-class MainViewModelTest {
+class ListagemHeroisViewModelTest {
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
     @MockK
     lateinit var app: App
     lateinit var backendRepository: BackendRepository
-    lateinit var detalhesHeroiViewModel: DetalhesHeroiViewModel
+    lateinit var listagemHeroisViewModel: ListagemHeroisViewModel
 
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-        detalhesHeroiViewModel = DetalhesHeroiViewModel(app)
+        listagemHeroisViewModel = ListagemHeroisViewModel((app))
     }
 
     @Test
-    fun testSuccess() {
+    fun testSuccessAllCharacters() {
         coEvery { backendRepository.getHeroiAsync(any()) }
-        detalhesHeroiViewModel.success.observeForever {}
-        detalhesHeroiViewModel.getHeroi(0)
+        listagemHeroisViewModel.allCharacters.observeForever {}
+        listagemHeroisViewModel.getHerois()
 
-        assert(detalhesHeroiViewModel.success.value != null)
-        assert(detalhesHeroiViewModel.success.value!!.status == LiveDataResult.STATUS.SUCCESS)
+        assert(listagemHeroisViewModel.allCharacters.value != null)
+        assert(listagemHeroisViewModel.allCharacters.value!!.status == LiveDataResult.STATUS.SUCCESS)
     }
 
     @Test
-    fun testError() {
+    fun testErrorAllCharacters() {
         coEvery { backendRepository.getHeroiAsync(any()) } coAnswers { throw Exception("No network") }
-        detalhesHeroiViewModel.success.observeForever {}
-        detalhesHeroiViewModel.getHeroi(0)
+        listagemHeroisViewModel.allCharacters.observeForever {}
+        listagemHeroisViewModel.getHerois()
 
-        assert(detalhesHeroiViewModel.success.value != null)
-        assert(detalhesHeroiViewModel.success.value!!.status == LiveDataResult.STATUS.ERROR)
+        assert(listagemHeroisViewModel.allCharacters.value != null)
+        assert(listagemHeroisViewModel.allCharacters.value!!.status == LiveDataResult.STATUS.ERROR)
     }
 }

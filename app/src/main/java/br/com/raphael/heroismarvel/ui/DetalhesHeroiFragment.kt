@@ -14,7 +14,6 @@ import br.com.raphael.heroismarvel.viewmodel.DetalhesHeroiViewModel
 import cn.pedant.SweetAlert.SweetAlertDialog
 import coil.api.load
 import kotlinx.android.synthetic.main.fragment_detalhes_heroi.*
-import kotlinx.android.synthetic.main.item_heroi.*
 import kotlinx.android.synthetic.main.item_heroi.tv_nome
 
 class DetalhesHeroiFragment : Fragment() {

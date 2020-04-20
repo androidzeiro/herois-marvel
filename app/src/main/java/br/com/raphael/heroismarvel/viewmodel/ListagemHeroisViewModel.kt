@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import br.com.raphael.heroismarvel.App
 import br.com.raphael.heroismarvel.R
+import br.com.raphael.heroismarvel.components.LiveDataResult
 import br.com.raphael.heroismarvel.extensions.getResponse
 import br.com.raphael.heroismarvel.extensions.tryParse
 import br.com.raphael.heroismarvel.model.Personagem
@@ -24,12 +25,12 @@ class ListagemHeroisViewModel(application: Application) : AndroidViewModel(appli
     val error: LiveData<String>
         get() = _error
 
-    private val _allCharacters = MutableLiveData<List<Personagem>>()
-    val allCharacters: LiveData<List<Personagem>>
+    private val _allCharacters = MutableLiveData<LiveDataResult<List<Personagem>>>()
+    val allCharacters: LiveData<LiveDataResult<List<Personagem>>>
         get() = _allCharacters
 
-    private val _avengers = MutableLiveData<List<Personagem>>()
-    val avengers: LiveData<List<Personagem>>
+    private val _avengers = MutableLiveData<LiveDataResult<List<Personagem>>>()
+    val avengers: LiveData<LiveDataResult<List<Personagem>>>
         get() = _avengers
 
     private val _turn = MutableLiveData<Boolean>()
@@ -56,7 +57,7 @@ class ListagemHeroisViewModel(application: Application) : AndroidViewModel(appli
             try {
                 _loading.postValue(true)
                 val response = backendRepository.getHeroisAsync()
-                _allCharacters.postValue(response.data.results)
+                _allCharacters.postValue(LiveDataResult.success(response.data.results))
                 _loading.postValue(false)
             } catch (e: Exception) {
                 when (e) {
@@ -89,7 +90,7 @@ class ListagemHeroisViewModel(application: Application) : AndroidViewModel(appli
             try {
                 _loading.postValue(true)
                 val response = backendRepository.getAvengers()
-                _avengers.postValue(response)
+                _avengers.postValue(LiveDataResult.success(response ?: listOf()))
                 _loading.postValue(false)
             } catch (e: Exception) {
                 when (e) {
