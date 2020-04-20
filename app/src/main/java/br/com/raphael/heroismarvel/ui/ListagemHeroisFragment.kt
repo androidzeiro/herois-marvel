@@ -1,9 +1,12 @@
 package br.com.raphael.heroismarvel.ui
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -49,9 +52,6 @@ class ListagemHeroisFragment : Fragment() {
 
         viewModel.todos.observe(viewLifecycleOwner, Observer {
             if (viewModel.all.value == true) {
-                if(adapter.items.size > 0) {
-                    rv_listagem.smoothScrollToPosition(0)
-                }
                 adapter.items.clear()
                 adapter.items.addAll(it)
                 adapter.notifyDataSetChanged()
@@ -60,9 +60,6 @@ class ListagemHeroisFragment : Fragment() {
 
         viewModel.avengers.observe(viewLifecycleOwner, Observer {
             if (viewModel.all.value == false) {
-                if(adapter.items.size > 0) {
-                    rv_listagem.smoothScrollToPosition(0)
-                }
                 adapter.items.clear()
                 adapter.items.addAll(it)
                 adapter.notifyDataSetChanged()
@@ -83,6 +80,15 @@ class ListagemHeroisFragment : Fragment() {
             it?.let {
                 fb_all.isEnabled = !it
                 fb_avengers.isEnabled = it
+                if(it){
+                    (activity as AppCompatActivity?)?.supportActionBar?.title = getString(R.string.all_characters)
+                    fb_all.backgroundTintList = ColorStateList.valueOf(getColor(requireContext(), R.color.colorPrimaryDark))
+                    fb_avengers.backgroundTintList = ColorStateList.valueOf(getColor(requireContext(), R.color.colorPrimary))
+                } else {
+                    (activity as AppCompatActivity?)?.supportActionBar?.title = getString(R.string.avengers)
+                    fb_avengers.backgroundTintList = ColorStateList.valueOf(getColor(requireContext(), R.color.colorPrimaryDark))
+                    fb_all.backgroundTintList = ColorStateList.valueOf(getColor(requireContext(), R.color.colorPrimary))
+                }
             }
         })
 

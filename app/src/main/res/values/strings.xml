@@ -7,4 +7,6 @@
     <string name="msg_erro_api">%s Código: %s</string>
     <string name="attention">Attention</string>
     <string name="ok">Ok</string>
+    <string name="all_characters">All Characters</string>
+    <string name="avengers">Avengers</string>
 </resources>

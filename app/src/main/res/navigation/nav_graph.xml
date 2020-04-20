@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/listagemHeroisFragment"
         android:name="br.com.raphael.heroismarvel.ui.ListagemHeroisFragment"
-        android:label="Heróis"
+        android:label="All Characters"
         tools:layout="@layout/fragment_listagem_herois">
         <action
             android:id="@+id/listagemHerois_to_detalhesHerois"
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/detalhesHeroiFragment"
         android:name="br.com.raphael.heroismarvel.ui.DetalhesHeroiFragment"
-        android:label="Detalhes"
+        android:label="Details"
         tools:layout="@layout/fragment_detalhes_heroi">
         <argument
             android:name="id"
