@@ -79,7 +79,7 @@ class ListagemHeroisFragment : Fragment() {
         viewModel.allCharacters.observe(viewLifecycleOwner, Observer {
             if (viewModel.turn.value == true) {
                 adapter.items.clear()
-                adapter.items.addAll(it)
+                adapter.items.addAll(it.data?.toMutableList() ?: mutableListOf())
                 adapter.notifyDataSetChanged()
             }
         })
@@ -89,7 +89,7 @@ class ListagemHeroisFragment : Fragment() {
         viewModel.avengers.observe(viewLifecycleOwner, Observer {
             if (viewModel.turn.value == false) {
                 adapter.items.clear()
-                adapter.items.addAll(it)
+                adapter.items.addAll(it.data?.toMutableList() ?: mutableListOf())
                 adapter.notifyDataSetChanged()
             }
         })
