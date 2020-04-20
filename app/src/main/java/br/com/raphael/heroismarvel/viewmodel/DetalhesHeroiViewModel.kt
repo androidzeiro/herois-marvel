@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import br.com.raphael.heroismarvel.App
 import br.com.raphael.heroismarvel.R
+import br.com.raphael.heroismarvel.components.LiveDataResult
 import br.com.raphael.heroismarvel.extensions.getResponse
 import br.com.raphael.heroismarvel.extensions.tryParse
 import br.com.raphael.heroismarvel.model.Personagem
@@ -29,8 +30,8 @@ class DetalhesHeroiViewModel(application: Application) : AndroidViewModel(applic
     val erro: LiveData<String>
         get() = _erro
 
-    private val _sucesso = MutableLiveData<Personagem>()
-    val sucesso: LiveData<Personagem>
+    private val _sucesso = MutableLiveData<LiveDataResult<Personagem>>()
+    val sucesso: MutableLiveData<LiveDataResult<Personagem>>
         get() = _sucesso
 
     private val _carregando = MutableLiveData<Boolean>()
@@ -46,7 +47,7 @@ class DetalhesHeroiViewModel(application: Application) : AndroidViewModel(applic
             try {
                 _carregando.postValue(true)
                 val response = backendRepository.getHeroiAsync(id)
-                _sucesso.postValue(response.data.results[0])
+                _sucesso.value = LiveDataResult.success(response.data.results[0])
                 _carregando.postValue(false)
             } catch (e: Exception) {
                 when (e) {

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import br.com.raphael.heroismarvel.MainActivity
 import br.com.raphael.heroismarvel.R
 import br.com.raphael.heroismarvel.model.Personagem
 import br.com.raphael.heroismarvel.ui.adapters.HeroisAdapter
@@ -19,7 +20,6 @@ import br.com.raphael.heroismarvel.viewmodel.ListagemHeroisViewModel
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer
 import kotlinx.android.synthetic.main.fragment_listagem_herois.*
-
 
 class ListagemHeroisFragment : Fragment() {
 
@@ -86,11 +86,17 @@ class ListagemHeroisFragment : Fragment() {
                 fb_all.isEnabled = !it
                 fb_avengers.isEnabled = it
                 if(it){
-                    (activity as AppCompatActivity?)?.supportActionBar?.title = getString(R.string.all_characters)
+                    if (activity is MainActivity) {
+                        (activity as AppCompatActivity?)?.supportActionBar?.title =
+                            getString(R.string.all_characters)
+                    }
                     fb_all.backgroundTintList = ColorStateList.valueOf(getColor(requireContext(), R.color.colorPrimaryDark))
                     fb_avengers.backgroundTintList = ColorStateList.valueOf(getColor(requireContext(), R.color.colorPrimary))
                 } else {
-                    (activity as AppCompatActivity?)?.supportActionBar?.title = getString(R.string.avengers)
+                    if (activity is MainActivity) {
+                        (activity as AppCompatActivity?)?.supportActionBar?.title =
+                            getString(R.string.avengers)
+                    }
                     fb_avengers.backgroundTintList = ColorStateList.valueOf(getColor(requireContext(), R.color.colorPrimaryDark))
                     fb_all.backgroundTintList = ColorStateList.valueOf(getColor(requireContext(), R.color.colorPrimary))
                 }

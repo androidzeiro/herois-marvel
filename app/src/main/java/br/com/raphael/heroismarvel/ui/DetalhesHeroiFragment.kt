@@ -49,16 +49,16 @@ class DetalhesHeroiFragment : Fragment() {
 
         viewModel.sucesso.observe(viewLifecycleOwner, Observer {
             it?.let {
-                if (it.thumbnail.path.isNotEmpty()) {
-                    iv_heroi.load("${it.thumbnail.path}.${it.thumbnail.extension}") {
+                if (it.data?.thumbnail?.path?.isNotEmpty() == true) {
+                    iv_heroi.load("${it.data.thumbnail.path}.${it.data.thumbnail.extension}") {
                         crossfade(750)
                         placeholder(R.drawable.ic_image_placeholder)
                         error(R.drawable.ic_image_placeholder)
                     }
                 }
 
-                tv_nome.text = it.name
-                tv_descricao.text = if(it.description.isNotEmpty()) it.description else getString(R.string.description_available)
+                tv_nome.text = it.data?.name
+                tv_descricao.text = if(it.data?.description?.isNotEmpty() == true) it.data.description else getString(R.string.description_available)
             }
         })
 
