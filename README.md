@@ -1,4 +1,9 @@
-# herois-marvel
+# Personagens da Marvel
+
+## Download
+[Releases](https://github.com/androidzeiro/herois-marvel/releases)
+
+<img src="/previews/preview.gif" align="right" width="32%"/>
 
 ## Especificações técnicas
 
@@ -15,3 +20,14 @@
 - [OkHttp3](https://github.com/square/okhttp) - HTTP
 - [Coil](https://github.com/coil-kt/coil) - Carregamento de imagens.
 - [Material-Components](https://github.com/material-components/material-components-android) - Material design.
+- [Discrete Scrollview](https://github.com/yarolegovich/DiscreteScrollView)
+- [Sweet Alert Dialog](https://github.com/F0RIS/sweet-alert-dialog) - Dialogs.
+
+
+
+<img src="/previews/erro1.png" align="left" width="32%"/>
+<img src="/previews/erro2.png" align="center" width="32%"/>
+
+<img src="/previews/testes.png" align="left" width="70%"/>
+
+
