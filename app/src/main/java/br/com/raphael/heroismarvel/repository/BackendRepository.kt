@@ -2,6 +2,7 @@ package br.com.raphael.heroismarvel.repository
 
 import android.content.Context
 import br.com.raphael.heroismarvel.App
+import br.com.raphael.heroismarvel.BuildConfig
 import br.com.raphael.heroismarvel.extensions.fromJson
 import br.com.raphael.heroismarvel.model.Personagem
 import br.com.raphael.heroismarvel.model.Response
@@ -14,11 +15,13 @@ class BackendRepository @Inject constructor(
     private val app: App
 ) {
 
-    suspend fun getHeroisAsync(): Response =
-        backendService.getHerois()
+    suspend fun getHeroisAsync(): Response {
+        return backendService.getHerois(BuildConfig.TS, BuildConfig.APIKEY, BuildConfig.HASH)
+    }
 
-    suspend fun getHeroiAsync(id: Int): Response =
-        backendService.getHeroi(id)
+    suspend fun getHeroiAsync(id: Int): Response {
+        return backendService.getHeroi(id, BuildConfig.TS, BuildConfig.APIKEY, BuildConfig.HASH)
+    }
 
     private fun readAsset(context: Context, fileName: String): String =
         context.assets.open(fileName).bufferedReader().use { it.readText() }
